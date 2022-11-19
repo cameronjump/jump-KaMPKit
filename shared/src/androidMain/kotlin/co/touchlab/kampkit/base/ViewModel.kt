@@ -1,10 +1,10 @@
 package co.touchlab.kampkit.base
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.ViewModel as AndroidXViewModel
+import androidx.lifecycle.viewModelScope as androidXViewModelScope
 
-actual abstract class ViewModel actual constructor() : ViewModel() {
+actual abstract class ViewModel actual constructor() : AndroidXViewModel() {
     actual val viewModelScope: CoroutineScope = androidXViewModelScope
 
     actual override fun onCleared() {
