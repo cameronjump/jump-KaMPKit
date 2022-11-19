@@ -10,10 +10,10 @@ import org.mockito.Mock
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 
-class BreedViewModelTest  {
-    
+class BreedViewModelTest {
+
     @Mock
-    lateinit var repository: BreedRepositoryImpl
+    lateinit var repository: BreedRepository
 
     private var kermit = Logger(StaticConfig())
 

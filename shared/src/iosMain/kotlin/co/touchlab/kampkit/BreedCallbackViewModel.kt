@@ -1,7 +1,6 @@
 package co.touchlab.kampkit
 
 import co.touchlab.kampkit.db.Breed
-import co.touchlab.kampkit.feature.breed.BreedRepository
 import co.touchlab.kampkit.feature.breed.BreedViewModel
 import co.touchlab.kampkit.models.CallbackViewModel
 import co.touchlab.kermit.Logger

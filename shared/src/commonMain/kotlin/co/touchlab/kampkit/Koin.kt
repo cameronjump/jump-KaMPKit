@@ -1,11 +1,8 @@
 package co.touchlab.kampkit
 
 import co.touchlab.kampkit.base.StaleDataDelegate
-import co.touchlab.kampkit.base.StaleDataDelegateImpl
 import co.touchlab.kampkit.feature.breed.BreedRepository
-import co.touchlab.kampkit.feature.breed.BreedRepositoryImpl
 import co.touchlab.kampkit.ktor.Api
-import co.touchlab.kampkit.ktor.ApiImpl
 import co.touchlab.kampkit.ktor.HttpClientProvider
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.StaticConfig
@@ -54,7 +51,7 @@ private val coreModule = module {
         )
     }
     single<Api> {
-        ApiImpl(
+        Api(
             getWith("Api"),
             get()
         )
@@ -69,7 +66,7 @@ private val coreModule = module {
         ).client
     }
     single<StaleDataDelegate> {
-        StaleDataDelegateImpl(
+        StaleDataDelegate(
             get(),
             get()
         )
@@ -85,7 +82,7 @@ private val coreModule = module {
 
 private val breedFeatureModule = module {
     single<BreedRepository> {
-        BreedRepositoryImpl(
+        BreedRepository(
             getWith("BreedRepository"),
             get(),
             get(),

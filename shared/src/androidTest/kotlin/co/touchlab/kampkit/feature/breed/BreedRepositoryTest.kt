@@ -2,10 +2,8 @@ package co.touchlab.kampkit.feature.breed
 
 import co.touchlab.kampkit.DatabaseHelper
 import co.touchlab.kampkit.base.StaleDataDelegate
-import co.touchlab.kampkit.base.StaleDataDelegateImpl
 import co.touchlab.kampkit.db.Breed
 import co.touchlab.kampkit.ktor.Api
-import co.touchlab.kampkit.ktor.ApiImpl
 import co.touchlab.kampkit.testDbConnection
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.StaticConfig
@@ -17,13 +15,13 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-class BreedRepositoryImplTest {
+class BreedRepositoryTest {
 
     @Mock
-    lateinit var staleDataDelegate: StaleDataDelegateImpl
+    lateinit var staleDataDelegate: StaleDataDelegate
 
     @Mock
-    lateinit var api: ApiImpl
+    lateinit var api: Api
 
     private val kermit = Logger(StaticConfig())
 
@@ -34,7 +32,7 @@ class BreedRepositoryImplTest {
         Dispatchers.Default
     )
 
-    private lateinit var ut: BreedRepositoryImpl
+    private lateinit var ut: BreedRepository
 
     companion object {
         private val appenzeller = Breed(1, "appenzeller", false)
@@ -48,7 +46,7 @@ class BreedRepositoryImplTest {
     @BeforeTest
     fun init() {
         openMocks(this)
-        ut = BreedRepositoryImpl(
+        ut = BreedRepository(
             kermit,
             dbHelper,
             api,

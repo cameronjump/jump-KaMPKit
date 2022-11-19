@@ -1,7 +1,7 @@
 package co.touchlab.kampkit
 
 import co.touchlab.kampkit.base.ApiStatus
-import co.touchlab.kampkit.ktor.ApiImpl
+import co.touchlab.kampkit.ktor.Api
 import co.touchlab.kampkit.ktor.HttpClientProvider
 import co.touchlab.kampkit.networkmodels.BreedDto
 import co.touchlab.kermit.LogWriter
@@ -42,7 +42,7 @@ class ApiTest {
             emptyLogger,
             engine
         ).client
-        val api = ApiImpl(emptyLogger, client)
+        val api = Api(emptyLogger, client)
 
         val result = api.getBreeds()
         assertEquals(
@@ -71,7 +71,7 @@ class ApiTest {
             emptyLogger,
             engine
         ).client
-        val api = ApiImpl(emptyLogger, client)
+        val api = Api(emptyLogger, client)
 
         assertFailsWith<ClientRequestException> {
             api.getBreeds()
