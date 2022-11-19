@@ -1,7 +1,7 @@
 package co.touchlab.kampkit.feature.breed
 
-import co.touchlab.kampkit.db.Breed
 import co.touchlab.kampkit.base.ViewModel
+import co.touchlab.kampkit.db.Breed
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow

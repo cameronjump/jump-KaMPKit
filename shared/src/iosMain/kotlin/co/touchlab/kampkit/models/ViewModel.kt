@@ -2,8 +2,6 @@ package co.touchlab.kampkit.models
 
 import co.touchlab.kampkit.FlowAdapter
 import co.touchlab.kampkit.base.ViewModel
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 
 abstract class CallbackViewModel {

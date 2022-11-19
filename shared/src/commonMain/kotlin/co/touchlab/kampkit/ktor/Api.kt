@@ -9,5 +9,4 @@ import co.touchlab.kampkit.networkmodels.BreedDto
 interface Api {
 
     suspend fun getBreeds(): ApiStatus<BreedDto>
-
 }
