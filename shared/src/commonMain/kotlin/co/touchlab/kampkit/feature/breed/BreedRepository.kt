@@ -34,15 +34,24 @@ class BreedRepository(
                     BreedRepoData(isError = true)
                 }
                 ApiStatus.NoAction,
-                ApiStatus.NetworkError,
                 is ApiStatus.Success -> {
                     BreedRepoData(
                         data = items.sortedBy { it.name }
                     )
                 }
+                ApiStatus.NetworkError -> {
+                    if (items.isNotEmpty()) {
+                        BreedRepoData(
+                            data = items.sortedBy { it.name }
+                        )
+                    } else {
+                        BreedRepoData(isError = true)
+                    }
+                }
                 ApiStatus.Loading -> BreedRepoData(
                     isLoading = true,
-                    data = items.sortedBy { it.name })
+                    data = items.sortedBy { it.name }
+                )
             }
         }
 
