@@ -40,7 +40,9 @@ class BreedRepository(
                         data = items.sortedBy { it.name }
                     )
                 }
-                ApiStatus.Loading -> BreedRepoData(isLoading = true)
+                ApiStatus.Loading -> BreedRepoData(
+                    isLoading = true,
+                    data = items.sortedBy { it.name })
             }
         }
 
