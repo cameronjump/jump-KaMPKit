@@ -19,7 +19,7 @@ class BreedRepositoryImpl(
     private val dbHelper: DatabaseHelper,
     private val api: Api,
     private val staleDataDelegate: StaleDataDelegate
-): BreedRepository {
+) : BreedRepository {
 
     init {
         ensureNeverFrozen()
@@ -29,7 +29,7 @@ class BreedRepositoryImpl(
 
     override fun getData(): Flow<BreedRepoData> =
         combine(dbHelper.selectAllItems(), requestStatus.asStateFlow()) { items, requestStatus ->
-            when(requestStatus) {
+            when (requestStatus) {
                 is ApiStatus.Error -> {
                     BreedRepoData(isError = true)
                 }
@@ -76,5 +76,4 @@ class BreedRepositoryImpl(
     override suspend fun updateBreedFavorite(breed: Breed) {
         dbHelper.updateFavorite(breed.id, !breed.favorite)
     }
-
 }

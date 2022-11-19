@@ -47,13 +47,13 @@ class ApiTest {
         val result = api.getBreeds()
         assertEquals(
             ApiStatus.Success(
-            BreedDto(
-                mapOf(
-                    "affenpinscher" to emptyList(),
-                    "african" to listOf("shepherd")
-                ),
-                "success"
-            )
+                BreedDto(
+                    mapOf(
+                        "affenpinscher" to emptyList(),
+                        "african" to listOf("shepherd")
+                    ),
+                    "success"
+                )
             ),
             result
         )

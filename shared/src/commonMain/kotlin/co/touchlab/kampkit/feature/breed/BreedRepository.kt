@@ -12,5 +12,4 @@ interface BreedRepository {
     suspend fun refreshData()
 
     suspend fun updateBreedFavorite(breed: Breed)
-
 }

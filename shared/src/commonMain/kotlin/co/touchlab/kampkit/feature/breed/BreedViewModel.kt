@@ -63,5 +63,4 @@ class BreedViewModel(
             breedRepository.updateBreedFavorite(breed)
         }
     }
-
 }

@@ -2,8 +2,8 @@ package co.touchlab.kampkit
 
 import co.touchlab.kampkit.base.StaleDataDelegate
 import co.touchlab.kampkit.db.Breed
-import co.touchlab.kampkit.ktor.Api
 import co.touchlab.kampkit.feature.breed.BreedRepositoryImpl
+import co.touchlab.kampkit.ktor.Api
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.StaticConfig
 import kotlinx.coroutines.Dispatchers
@@ -46,7 +46,10 @@ class BreedRepositoryImplTest : TestsWithMocks() {
     @BeforeTest
     fun init() {
         ut = BreedRepositoryImpl(
-            kermit, dbHelper, api, staleDataDelegate
+            kermit,
+            dbHelper,
+            api,
+            staleDataDelegate
         )
     }
 
@@ -68,5 +71,4 @@ class BreedRepositoryImplTest : TestsWithMocks() {
         //     assertEquals(breedsNoFavorite, awaitItem())
         // }
     }
-
 }

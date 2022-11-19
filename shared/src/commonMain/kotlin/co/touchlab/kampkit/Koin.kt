@@ -2,11 +2,11 @@ package co.touchlab.kampkit
 
 import co.touchlab.kampkit.base.StaleDataDelegate
 import co.touchlab.kampkit.base.StaleDataDelegateImpl
+import co.touchlab.kampkit.feature.breed.BreedRepository
+import co.touchlab.kampkit.feature.breed.BreedRepositoryImpl
 import co.touchlab.kampkit.ktor.Api
 import co.touchlab.kampkit.ktor.ApiImpl
 import co.touchlab.kampkit.ktor.HttpClientProvider
-import co.touchlab.kampkit.feature.breed.BreedRepository
-import co.touchlab.kampkit.feature.breed.BreedRepositoryImpl
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.StaticConfig
 import co.touchlab.kermit.platformLogWriter
@@ -89,7 +89,7 @@ private val breedFeatureModule = module {
             getWith("BreedRepository"),
             get(),
             get(),
-            get(),
+            get()
         )
     }
 }

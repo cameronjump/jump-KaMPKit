@@ -6,5 +6,4 @@ import co.touchlab.kampkit.ktor.dto.BreedDto
 interface Api {
 
     suspend fun getBreeds(): ApiStatus<BreedDto>
-
 }

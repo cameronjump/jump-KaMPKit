@@ -14,7 +14,7 @@ import org.kodein.mock.tests.TestsWithMocks
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 
-class BreedViewModelTest: TestsWithMocks() {
+class BreedViewModelTest : TestsWithMocks() {
     override fun setUpMocks() = injectMocks(mocker)
 
     @Mock
@@ -46,5 +46,4 @@ class BreedViewModelTest: TestsWithMocks() {
     fun tearDown() {
         Dispatchers.resetMain()
     }
-
 }

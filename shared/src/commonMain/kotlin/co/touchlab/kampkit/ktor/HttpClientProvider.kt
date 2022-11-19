@@ -32,5 +32,4 @@ class HttpClientProvider(private val log: Logger, engine: HttpClientEngine) {
             socketTimeoutMillis = timeout
         }
     }
-
 }

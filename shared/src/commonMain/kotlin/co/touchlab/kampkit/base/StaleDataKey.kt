@@ -1,6 +1,6 @@
 package co.touchlab.kampkit.base
 
-enum class StaleDataKey(val keyName: String, val msUntilStale: Int){
+enum class StaleDataKey(val keyName: String, val msUntilStale: Int) {
     BreedStaleData("BreedTimestampKey", ONE_MINUTE_MS * 10);
 }
 

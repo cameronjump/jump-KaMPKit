@@ -12,7 +12,7 @@ import io.ktor.http.encodedPath
 import io.ktor.http.takeFrom
 import co.touchlab.kermit.Logger as KermitLogger
 
-class ApiImpl(private val log: KermitLogger, private val client: HttpClient): Api {
+class ApiImpl(private val log: KermitLogger, private val client: HttpClient) : Api {
 
     init {
         ensureNeverFrozen()
