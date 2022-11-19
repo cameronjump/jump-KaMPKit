@@ -3,7 +3,7 @@ package co.touchlab.kampkit
 import co.touchlab.kampkit.base.ApiStatus
 import co.touchlab.kampkit.ktor.ApiImpl
 import co.touchlab.kampkit.ktor.HttpClientProvider
-import co.touchlab.kampkit.ktor.dto.BreedDto
+import co.touchlab.kampkit.networkmodels.BreedDto
 import co.touchlab.kermit.LogWriter
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.LoggerConfig

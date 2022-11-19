@@ -6,7 +6,7 @@ import co.touchlab.kampkit.base.StaleDataDelegate
 import co.touchlab.kampkit.base.StaleDataKey
 import co.touchlab.kampkit.db.Breed
 import co.touchlab.kampkit.ktor.Api
-import co.touchlab.kampkit.ktor.dto.BreedDto
+import co.touchlab.kampkit.networkmodels.BreedDto
 import co.touchlab.kermit.Logger
 import co.touchlab.stately.ensureNeverFrozen
 import kotlinx.coroutines.flow.Flow

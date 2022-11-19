@@ -3,6 +3,10 @@ package co.touchlab.kampkit.base
 import com.russhwolf.settings.Settings
 import kotlinx.datetime.Clock
 
+/**
+ * Handles updating/checking if data is stale given a [StaleDataKey] based on system time
+ * and stored [settings].
+ */
 class StaleDataDelegateImpl(
     private val settings: Settings,
     private val clock: Clock

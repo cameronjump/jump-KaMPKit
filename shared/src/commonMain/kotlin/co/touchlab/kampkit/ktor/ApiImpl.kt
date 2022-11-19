@@ -2,7 +2,7 @@ package co.touchlab.kampkit.ktor
 
 import co.touchlab.kampkit.base.ApiStatus
 import co.touchlab.kampkit.base.ApiStatus.Companion.toResult
-import co.touchlab.kampkit.ktor.dto.BreedDto
+import co.touchlab.kampkit.networkmodels.BreedDto
 import co.touchlab.stately.ensureNeverFrozen
 import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder
@@ -12,6 +12,9 @@ import io.ktor.http.encodedPath
 import io.ktor.http.takeFrom
 import co.touchlab.kermit.Logger as KermitLogger
 
+/**
+ * Implementation of all network calls
+ */
 class ApiImpl(private val log: KermitLogger, private val client: HttpClient) : Api {
 
     init {

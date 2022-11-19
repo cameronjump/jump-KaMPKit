@@ -9,6 +9,9 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
 
+/**
+ * Provides [HttpClient]
+ */
 class HttpClientProvider(private val log: Logger, engine: HttpClientEngine) {
 
     val client = HttpClient(engine) {

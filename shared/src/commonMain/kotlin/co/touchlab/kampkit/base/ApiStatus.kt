@@ -4,6 +4,10 @@ import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
 
+/**
+ * State class to represent the status of a network request.
+ * Helpful for explicit handling when using both local and remote data sources.
+ */
 sealed class ApiStatus<out T> {
 
     data class Success<T>(

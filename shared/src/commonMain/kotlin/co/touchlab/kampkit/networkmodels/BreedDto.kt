@@ -1,4 +1,4 @@
-package co.touchlab.kampkit.ktor.dto
+package co.touchlab.kampkit.networkmodels
 
 import kotlinx.serialization.Serializable
 
