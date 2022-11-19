@@ -1,24 +1,19 @@
-package co.touchlab.kampkit
+package co.touchlab.kampkit.feature.breed
 
 import co.touchlab.kampkit.db.Breed
-import co.touchlab.kampkit.feature.breed.BreedRepository
-import co.touchlab.kampkit.feature.breed.BreedViewModel
-import co.touchlab.kampkit.feature.breed.BreedViewState
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.StaticConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import org.kodein.mock.Mock
-import org.kodein.mock.tests.TestsWithMocks
+import org.mockito.Mock
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 
-class BreedViewModelTest : TestsWithMocks() {
-    override fun setUpMocks() = injectMocks(mocker)
-
+class BreedViewModelTest  {
+    
     @Mock
-    lateinit var repository: BreedRepository
+    lateinit var repository: BreedRepositoryImpl
 
     private var kermit = Logger(StaticConfig())
 

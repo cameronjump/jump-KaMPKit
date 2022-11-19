@@ -37,7 +37,7 @@ multiplatformSettings = "1.0.0-alpha01"
 turbine = "0.12.1"
 sqlDelight = "1.5.3"
 
-mocks-version = "1.10.0"
+mockito = "4.0.0"
 
 [libraries]
 android-desugaring = { module = "com.android.tools:desugar_jdk_libs", version.ref = "android-desugaring" }
@@ -90,7 +90,8 @@ touchlab-stately = { module = "co.touchlab:stately-common", version.ref = "state
 
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-#mocks = { module = "org.kodein.mock.mockmp", version.ref = "mocks-version" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito" }
+mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockito" }
 
 [plugins]
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
@@ -117,12 +118,13 @@ shared-commonTest = [
     "turbine",
     "coroutines-test",
     "ktor-client-mock",
-#    "mocks"
 ]
 shared-androidTest = [
     "androidx-test-junit",
     "coroutines-test",
     "roboelectric",
-    "sqlDelight-jvm"
+    "sqlDelight-jvm",
+    "mockito-kotlin",
+    "mockito-inline"
 ]
 

@@ -1,27 +1,29 @@
-package co.touchlab.kampkit
+package co.touchlab.kampkit.feature.breed
 
+import co.touchlab.kampkit.DatabaseHelper
 import co.touchlab.kampkit.base.StaleDataDelegate
+import co.touchlab.kampkit.base.StaleDataDelegateImpl
 import co.touchlab.kampkit.db.Breed
-import co.touchlab.kampkit.feature.breed.BreedRepositoryImpl
 import co.touchlab.kampkit.ktor.Api
+import co.touchlab.kampkit.ktor.ApiImpl
+import co.touchlab.kampkit.testDbConnection
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.StaticConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
-import org.kodein.mock.Mock
-import org.kodein.mock.tests.TestsWithMocks
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations.openMocks
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-class BreedRepositoryImplTest : TestsWithMocks() {
-    override fun setUpMocks() = injectMocks(mocker)
+class BreedRepositoryImplTest {
 
     @Mock
-    lateinit var staleDataDelegate: StaleDataDelegate
+    lateinit var staleDataDelegate: StaleDataDelegateImpl
 
     @Mock
-    lateinit var api: Api
+    lateinit var api: ApiImpl
 
     private val kermit = Logger(StaticConfig())
 
@@ -45,6 +47,7 @@ class BreedRepositoryImplTest : TestsWithMocks() {
 
     @BeforeTest
     fun init() {
+        openMocks(this)
         ut = BreedRepositoryImpl(
             kermit,
             dbHelper,
