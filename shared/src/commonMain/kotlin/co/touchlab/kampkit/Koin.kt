@@ -50,7 +50,7 @@ private val coreModule = module {
             Dispatchers.Default
         )
     }
-    single<Api> {
+    single {
         Api(
             getWith("Api"),
             get()
@@ -65,7 +65,7 @@ private val coreModule = module {
             get()
         ).client
     }
-    single<StaleDataDelegate> {
+    single {
         StaleDataDelegate(
             get(),
             get()
@@ -81,7 +81,7 @@ private val coreModule = module {
 }
 
 private val breedFeatureModule = module {
-    single<BreedRepository> {
+    single {
         BreedRepository(
             getWith("BreedRepository"),
             get(),
