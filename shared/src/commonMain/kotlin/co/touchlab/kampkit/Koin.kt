@@ -1,8 +1,9 @@
 package co.touchlab.kampkit
 
-import co.touchlab.kampkit.ktor.DogApi
-import co.touchlab.kampkit.ktor.DogApiImpl
-import co.touchlab.kampkit.models.BreedRepository
+import co.touchlab.kampkit.base.StaleDataDelegate
+import co.touchlab.kampkit.feature.breed.BreedRepository
+import co.touchlab.kampkit.ktor.Api
+import co.touchlab.kampkit.ktor.HttpClientProvider
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.StaticConfig
 import co.touchlab.kermit.platformLogWriter
@@ -22,7 +23,8 @@ fun initKoin(appModule: Module): KoinApplication {
         modules(
             appModule,
             platformModule,
-            coreModule
+            coreModule,
+            breedFeatureModule
         )
     }
 
@@ -43,19 +45,31 @@ fun initKoin(appModule: Module): KoinApplication {
 private val coreModule = module {
     single {
         DatabaseHelper(
-            get(),
             getWith("DatabaseHelper"),
+            get(),
             Dispatchers.Default
         )
     }
-    single<DogApi> {
-        DogApiImpl(
-            getWith("DogApiImpl"),
+    single {
+        Api(
+            getWith("Api"),
             get()
         )
     }
     single<Clock> {
         Clock.System
+    }
+    single {
+        HttpClientProvider(
+            getWith("HttpClient"),
+            get()
+        ).client
+    }
+    single {
+        StaleDataDelegate(
+            get(),
+            get()
+        )
     }
 
     // platformLogWriter() is a relatively simple config option, useful for local debugging. For production
@@ -64,13 +78,14 @@ private val coreModule = module {
     // See https://github.com/touchlab/Kermit
     val baseLogger = Logger(config = StaticConfig(logWriterList = listOf(platformLogWriter())), "KampKit")
     factory { (tag: String?) -> if (tag != null) baseLogger.withTag(tag) else baseLogger }
+}
 
+private val breedFeatureModule = module {
     single {
         BreedRepository(
-            get(),
-            get(),
-            get(),
             getWith("BreedRepository"),
+            get(),
+            get(),
             get()
         )
     }

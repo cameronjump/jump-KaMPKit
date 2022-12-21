@@ -20,12 +20,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -34,8 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.flowWithLifecycle
 import co.touchlab.kampkit.android.R
 import co.touchlab.kampkit.db.Breed
-import co.touchlab.kampkit.models.BreedViewModel
-import co.touchlab.kampkit.models.BreedViewState
+import co.touchlab.kampkit.feature.breed.BreedViewModel
+import co.touchlab.kampkit.feature.breed.BreedViewState
 import co.touchlab.kermit.Logger
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -56,8 +56,6 @@ fun MainScreen(
     MainScreenContent(
         dogsState = dogsState,
         onRefresh = { viewModel.refreshBreeds() },
-        onSuccess = { data -> log.v { "View updating with ${data.size} breeds" } },
-        onError = { exception -> log.e { "Displaying error: $exception" } },
         onFavorite = { viewModel.updateBreedFavorite(it) }
     )
 }
@@ -66,8 +64,6 @@ fun MainScreen(
 fun MainScreenContent(
     dogsState: BreedViewState,
     onRefresh: () -> Unit = {},
-    onSuccess: (List<Breed>) -> Unit = {},
-    onError: (String) -> Unit = {},
     onFavorite: (Breed) -> Unit = {}
 ) {
     Surface(
@@ -83,17 +79,10 @@ fun MainScreenContent(
             }
             val breeds = dogsState.breeds
             if (breeds != null) {
-                LaunchedEffect(breeds) {
-                    onSuccess(breeds)
-                }
                 Success(successData = breeds, favoriteBreed = onFavorite)
             }
-            val error = dogsState.error
-            if (error != null) {
-                LaunchedEffect(error) {
-                    onError(error)
-                }
-                Error(error)
+            if (dogsState.isError) {
+                Error()
             }
         }
     }
@@ -113,7 +102,7 @@ fun Empty() {
 }
 
 @Composable
-fun Error(error: String) {
+fun Error() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -121,7 +110,7 @@ fun Error(error: String) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = error)
+        Text(text = "Something went wrong")
     }
 }
 
@@ -169,12 +158,14 @@ fun FavoriteIcon(breed: Breed) {
         if (fav) {
             Image(
                 painter = painterResource(id = R.drawable.ic_favorite_border_24px),
-                contentDescription = stringResource(R.string.favorite_breed, breed.name)
+                contentDescription = stringResource(R.string.favorite_breed, breed.name),
+                colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariant)
             )
         } else {
             Image(
                 painter = painterResource(id = R.drawable.ic_favorite_24px),
-                contentDescription = stringResource(R.string.unfavorite_breed, breed.name)
+                contentDescription = stringResource(R.string.unfavorite_breed, breed.name),
+                colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariant)
             )
         }
     }

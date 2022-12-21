@@ -22,7 +22,7 @@ class ObservableBreedModel: ObservableObject {
     var breeds: [Breed]?
 
     @Published
-    var error: String?
+    var error = false
 
     private var cancellables = [AnyCancellable]()
 
@@ -32,13 +32,13 @@ class ObservableBreedModel: ObservableObject {
         doPublish(viewModel.breeds) { [weak self] dogsState in
             self?.loading = dogsState.isLoading
             self?.breeds = dogsState.breeds
-            self?.error = dogsState.error
+            self?.error = dogsState.isError
 
             if let breeds = dogsState.breeds {
                 log.d(message: {"View updating with \(breeds.count) breeds"})
             }
-            if let errorMessage = dogsState.error {
-                log.e(message: {"Displaying error: \(errorMessage)"})
+            if dogsState.isError {
+                log.e(message: {"Displaying error"})
             }
         }.store(in: &cancellables)
 
@@ -70,7 +70,7 @@ struct BreedListScreen: View {
         BreedListContent(
             loading: observableModel.loading,
             breeds: observableModel.breeds,
-            error: observableModel.error,
+            isError: observableModel.error,
             onBreedFavorite: { observableModel.onBreedFavorite($0) },
             refresh: { observableModel.refresh() }
         )
@@ -86,7 +86,7 @@ struct BreedListScreen: View {
 struct BreedListContent: View {
     var loading: Bool
     var breeds: [Breed]?
-    var error: String?
+    var isError: Bool
     var onBreedFavorite: (Breed) -> Void
     var refresh: () -> Void
 
@@ -100,8 +100,8 @@ struct BreedListContent: View {
                         }
                     }
                 }
-                if let error = error {
-                    Text(error)
+                if isError {
+                    Text("Something went wrong")
                         .foregroundColor(.red)
                 }
                 Button("Refresh") {
@@ -138,7 +138,7 @@ struct BreedListScreen_Previews: PreviewProvider {
                 Breed(id: 0, name: "appenzeller", favorite: false),
                 Breed(id: 1, name: "australian", favorite: true)
             ],
-            error: nil,
+            isError: false,
             onBreedFavorite: { _ in },
             refresh: {}
         )

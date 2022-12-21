@@ -1,7 +1,9 @@
 package co.touchlab.kampkit
 
-import co.touchlab.kampkit.ktor.DogApiImpl
-import co.touchlab.kampkit.response.BreedResult
+import co.touchlab.kampkit.base.ApiStatus
+import co.touchlab.kampkit.ktor.Api
+import co.touchlab.kampkit.ktor.HttpClientProvider
+import co.touchlab.kampkit.networkmodels.BreedDto
 import co.touchlab.kermit.LogWriter
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.LoggerConfig
@@ -18,7 +20,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-class DogApiTest {
+class ApiTest {
     private val emptyLogger = Logger(
         config = object : LoggerConfig {
             override val logWriterList: List<LogWriter> = emptyList()
@@ -36,16 +38,22 @@ class DogApiTest {
                 headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString())
             )
         }
-        val dogApi = DogApiImpl(emptyLogger, engine)
+        val client = HttpClientProvider(
+            emptyLogger,
+            engine
+        ).client
+        val api = Api(emptyLogger, client)
 
-        val result = dogApi.getJsonFromApi()
+        val result = api.getBreeds()
         assertEquals(
-            BreedResult(
-                mapOf(
-                    "affenpinscher" to emptyList(),
-                    "african" to listOf("shepherd")
-                ),
-                "success"
+            ApiStatus.Success(
+                BreedDto(
+                    mapOf(
+                        "affenpinscher" to emptyList(),
+                        "african" to listOf("shepherd")
+                    ),
+                    "success"
+                )
             ),
             result
         )
@@ -59,10 +67,14 @@ class DogApiTest {
                 status = HttpStatusCode.NotFound
             )
         }
-        val dogApi = DogApiImpl(emptyLogger, engine)
+        val client = HttpClientProvider(
+            emptyLogger,
+            engine
+        ).client
+        val api = Api(emptyLogger, client)
 
         assertFailsWith<ClientRequestException> {
-            dogApi.getJsonFromApi()
+            api.getBreeds()
         }
     }
 }
